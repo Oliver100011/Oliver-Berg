@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oliver Berg | Patriots</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #000000;
+      --cyan: #00d4ff;
+      --cyan-dim: rgba(0,212,255,0.12);
+      --cyan-border: rgba(0,212,255,0.22);
+      --text: #e8edf5;
+      --muted: #5a6a7a;
+      --card-bg: #060d18;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 60px;
+      background: rgba(0,0,0,0.9); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,212,255,0.07);
+    }
+    .nav-brand {
+      font-family: 'Orbitron', monospace; font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 3px; color: var(--cyan); text-decoration: none;
+      text-shadow: 0 0 14px var(--cyan);
+    }
+    .nav-links { display: flex; list-style: none; }
+    .nav-links a {
+      display: block; padding: 0 1.1rem; height: 60px; line-height: 60px;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+      text-decoration: none; color: var(--muted); transition: color 0.2s; position: relative;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--cyan); }
+    .nav-links a.active::after {
+      content: ''; position: absolute; bottom: 0; left: 1.1rem; right: 1.1rem;
+      height: 2px; background: var(--cyan); box-shadow: 0 0 8px var(--cyan);
+    }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 120px 1.5rem 60px;
+      text-align: center;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(198,12,48,0.08) 0%, transparent 70%);
+    }
+    .page-hero-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+    .page-hero h1 {
+      font-family: 'Orbitron', monospace; font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 900; letter-spacing: 0.1em; color: var(--cyan);
+      text-shadow: 0 0 30px rgba(0,212,255,0.4); margin-bottom: 1rem;
+    }
+    .page-hero p { font-size: 1rem; color: var(--muted); max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.8rem; border-radius: 8px; font-size: 0.78rem;
+      font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      text-decoration: none; transition: all 0.25s; cursor: pointer;
+    }
+    .btn-outline {
+      border: 1px solid var(--cyan-border); color: var(--cyan);
+      background: var(--cyan-dim);
+    }
+    .btn-outline:hover { border-color: var(--cyan); background: rgba(0,212,255,0.2); box-shadow: 0 0 20px rgba(0,212,255,0.15); }
+
+    /* SECTIONS */
+    .section { max-width: 720px; margin: 0 auto; padding: 0 1.5rem 4.5rem; }
+    .section-heading {
+      font-family: 'Orbitron', monospace; font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 2.5px; color: var(--cyan); text-shadow: 0 0 10px rgba(0,212,255,0.4);
+      margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem;
+    }
+
+    /* COLORS */
+    .colors-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+    .color-card {
+      background: var(--card-bg); border: 1px solid var(--cyan-border); border-radius: 10px;
+      padding: 1.2rem; display: flex; align-items: center; gap: 1rem;
+    }
+    .color-swatch { width: 36px; height: 36px; border-radius: 6px; flex-shrink: 0; }
+    .color-name { font-size: 0.88rem; font-weight: 500; color: var(--text); }
+    .color-hex { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; font-family: monospace; }
+
+    /* TABLE */
+    .data-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--cyan-border); }
+    .data-table thead tr { border-bottom: 1px solid var(--cyan-border); }
+    .data-table th { padding: 0.9rem 1.2rem; font-size: 0.65rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); text-align: left; }
+    .data-table td { padding: 0.9rem 1.2rem; font-size: 0.88rem; color: var(--text); border-bottom: 1px solid rgba(0,212,255,0.06); }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:hover td { background: rgba(0,212,255,0.03); }
+    .year-badge { font-size: 0.78rem; font-weight: 600; color: var(--cyan); font-family: monospace; }
+
+    /* LEGENDS GRID */
+    .legends-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .legend-card {
+      background: var(--card-bg); border: 1px solid var(--cyan-border); border-radius: 10px;
+      padding: 1.4rem 1.6rem; transition: border-color 0.2s;
+    }
+    .legend-card:hover { border-color: var(--cyan); }
+    .legend-name { font-size: 0.95rem; font-weight: 600; color: var(--cyan); margin-bottom: 0.3rem; }
+    .legend-role { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.25rem; }
+    .legend-note { font-size: 0.78rem; color: var(--muted); font-style: italic; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(0,212,255,0.07); padding: 2rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-brand { font-family: 'Orbitron', monospace; font-size: 0.82rem; font-weight: 700; letter-spacing: 3px; color: var(--cyan); text-shadow: 0 0 10px var(--cyan); }
+    .footer-tagline { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+    .footer-links { display: flex; gap: 1.4rem; }
+    .footer-links a { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { font-size: 0.7rem; color: var(--muted); }
+
+    .fade-in { animation: fi 0.6s ease both; }
+    .fade-in-2 { animation: fi 0.6s 0.1s ease both; }
+    .fade-in-3 { animation: fi 0.6s 0.2s ease both; }
+    .fade-in-4 { animation: fi 0.6s 0.3s ease both; }
+    @keyframes fi { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform:none; } }
+
+    .text-center { text-align: center; margin-top: 3rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-brand" href="index.html">OLIVER BERG</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="patriots.html" class="active">Patriots</a></li>
+      <li><a href="lacrosse.html">Lacrosse</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero fade-in">
+    <span class="page-hero-icon">🏈</span>
+    <h1>New England Patriots</h1>
+    <p>My favorite NFL team. The Patriots are one of the most legendary franchises in sports history — and they're right here in New England.</p>
+    <a class="btn btn-outline" href="https://www.patriots.com" target="_blank" rel="noopener">↗ VISIT PATRIOTS.COM</a>
+  </div>
+
+  <section class="section fade-in-2">
+    <div class="section-heading">Team Identity</div>
+    <div class="colors-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background:#002244;"></div>
+        <div><div class="color-name">Patriots Navy</div><div class="color-hex">#002244</div></div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#C60C30;"></div>
+        <div><div class="color-name">Red</div><div class="color-hex">#C60C30</div></div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#B0B7BC; border:1px solid rgba(255,255,255,0.1);"></div>
+        <div><div class="color-name">Silver</div><div class="color-hex">#B0B7BC</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section fade-in-3">
+    <div class="section-heading">🏆 6 Super Bowl Championships</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Year</th><th>Opponent</th><th style="text-align:right;">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="year-badge">2001</span></td><td>St. Louis Rams</td><td style="text-align:right;font-weight:600;">20–17</td></tr>
+        <tr><td><span class="year-badge">2003</span></td><td>Carolina Panthers</td><td style="text-align:right;font-weight:600;">32–29</td></tr>
+        <tr><td><span class="year-badge">2004</span></td><td>Philadelphia Eagles</td><td style="text-align:right;font-weight:600;">24–21</td></tr>
+        <tr><td><span class="year-badge">2014</span></td><td>Seattle Seahawks</td><td style="text-align:right;font-weight:600;">28–24</td></tr>
+        <tr><td><span class="year-badge">2016</span></td><td>Atlanta Falcons</td><td style="text-align:right;font-weight:600;">34–28 (OT)</td></tr>
+        <tr><td><span class="year-badge">2018</span></td><td>Los Angeles Rams</td><td style="text-align:right;font-weight:600;">13–3</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section fade-in-4">
+    <div class="section-heading">⭐ Patriots Legends</div>
+    <div class="legends-grid">
+      <div class="legend-card">
+        <div class="legend-name">Tom Brady</div>
+        <div class="legend-role">Quarterback (2000–2019)</div>
+        <div class="legend-note">Greatest of all time</div>
+      </div>
+      <div class="legend-card">
+        <div class="legend-name">Bill Belichick</div>
+        <div class="legend-role">Head Coach (2000–2023)</div>
+        <div class="legend-note">Most NFL coach wins</div>
+      </div>
+      <div class="legend-card">
+        <div class="legend-name">Rob Gronkowski</div>
+        <div class="legend-role">Tight End (2010–2019)</div>
+        <div class="legend-note">Best TE in history</div>
+      </div>
+      <div class="legend-card">
+        <div class="legend-name">Drake Maye</div>
+        <div class="legend-role">Quarterback (2024–)</div>
+        <div class="legend-note">The future is bright</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="text-center" style="padding-bottom:5rem;">
+    <a class="btn btn-outline" href="https://www.patriots.com" target="_blank" rel="noopener">↗ VISIT PATRIOTS.COM</a>
+  </div>
+
+  <footer>
+    <div>
+      <div class="footer-brand">OLIVER BERG</div>
+      <div class="footer-tagline">The Field | The Court | The Drive</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="patriots.html">Patriots</a>
+      <a href="lacrosse.html">Lacrosse</a>
+    </div>
+    <div class="footer-copy">&copy; 2026. Oliver Berg</div>
+  </footer>
+</body>
+</html>
