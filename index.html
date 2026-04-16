@@ -1,60 +1,248 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Oliver Berg - Home</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <h1 class="neon">Oliver</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About Me</a>
-      <a href="sports.html">Sports</a>
-    </nav>
-  </header>
-
-  <main>
-    <h2>Welcome to My Website</h2>
-    <p>This is my personal website!</p>
-
-    <h3>Favorite Team</h3>
-    <p>My favorite team is the Patriots.</p>
-    <a href="https://www.patriots.com" target="_blank">Visit Patriots Website</a>
-
-    <h3>My Lacrosse Team</h3>
-    <a href="https://my.sportngin.com" target="_blank">Visit My Lacrosse Team Page</a>
-  </main>
-</body>
-</html>
-
-
-<!-- about.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>About Oliver</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oliver Berg</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #000000;
+      --cyan: #00d4ff;
+      --cyan-dim: rgba(0,212,255,0.12);
+      --cyan-border: rgba(0,212,255,0.22);
+      --text: #e8edf5;
+      --muted: #5a6a7a;
+      --card-bg: #060d18;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 60px;
+      background: rgba(0,0,0,0.9); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,212,255,0.07);
+    }
+    .nav-brand {
+      font-family: 'Orbitron', monospace; font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 3px; color: var(--cyan); text-decoration: none;
+      text-shadow: 0 0 14px var(--cyan);
+    }
+    .nav-links { display: flex; list-style: none; }
+    .nav-links a {
+      display: block; padding: 0 1.1rem; height: 60px; line-height: 60px;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+      text-decoration: none; color: var(--muted); transition: color 0.2s; position: relative;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--cyan); }
+    .nav-links a.active::after {
+      content: ''; position: absolute; bottom: 0; left: 1.1rem; right: 1.1rem;
+      height: 2px; background: var(--cyan); box-shadow: 0 0 8px var(--cyan);
+    }
+
+    /* HERO */
+    .hero { padding-top: 60px; display: flex; flex-direction: column; align-items: center; }
+
+    .neon-frame {
+      width: 100%; position: relative;
+      background: radial-gradient(ellipse 80% 80% at center, #001a2e 0%, #000c1a 50%, #000000 100%);
+      overflow: hidden; aspect-ratio: 16/6.5;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .neon-frame::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.035) 1px, transparent 1px);
+      background-size: 55px 55px;
+    }
+    .corner { position: absolute; width: 22px; height: 22px; }
+    .corner-tl { top: 14px; left: 14px; border-top: 2px solid rgba(0,212,255,0.7); border-left: 2px solid rgba(0,212,255,0.7); }
+    .corner-tr { top: 14px; right: 14px; border-top: 2px solid rgba(0,212,255,0.7); border-right: 2px solid rgba(0,212,255,0.7); }
+    .corner-bl { bottom: 14px; left: 14px; border-bottom: 2px solid rgba(0,212,255,0.7); border-left: 2px solid rgba(0,212,255,0.7); }
+    .corner-br { bottom: 14px; right: 14px; border-bottom: 2px solid rgba(0,212,255,0.7); border-right: 2px solid rgba(0,212,255,0.7); }
+
+    .neon-name {
+      font-family: 'Orbitron', monospace; font-weight: 900;
+      font-size: clamp(4.5rem, 14vw, 11rem); letter-spacing: 0.15em;
+      color: transparent; -webkit-text-stroke: 2.5px #00e5ff;
+      position: relative; z-index: 2; line-height: 1;
+      filter: drop-shadow(0 0 5px #00e5ff) drop-shadow(0 0 18px #00c8ea) drop-shadow(0 0 50px #008faa) drop-shadow(0 0 90px #005577);
+      animation: neonPulse 3s ease-in-out infinite alternate;
+    }
+    @keyframes neonPulse {
+      0%   { filter: drop-shadow(0 0 4px #00e5ff) drop-shadow(0 0 12px #00c8ea) drop-shadow(0 0 35px #008faa) drop-shadow(0 0 70px #005577); }
+      100% { filter: drop-shadow(0 0 7px #00e5ff) drop-shadow(0 0 25px #00d4ff) drop-shadow(0 0 65px #00a8cc) drop-shadow(0 0 110px #006688); }
+    }
+
+    .neon-sub {
+      font-family: 'Orbitron', monospace; font-size: clamp(0.5rem, 1.3vw, 0.78rem);
+      letter-spacing: 0.5em; color: var(--cyan); text-shadow: 0 0 12px var(--cyan);
+      margin-top: 1rem; z-index: 2; position: relative;
+    }
+
+    .hero-tagline {
+      font-size: 0.78rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--muted); padding: 2rem 0 3.5rem;
+    }
+
+    /* SECTIONS */
+    .section { max-width: 720px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+    .section-heading {
+      font-family: 'Orbitron', monospace; font-size: 0.95rem; font-weight: 700;
+      letter-spacing: 3px; color: var(--cyan); text-shadow: 0 0 10px rgba(0,212,255,0.45);
+      margin-bottom: 1.8rem; text-align: center;
+    }
+
+    /* BIO CARD */
+    .bio-card {
+      background: var(--card-bg); border: 1px solid var(--cyan-border); border-radius: 12px;
+      padding: 2rem 2.4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem 2.5rem;
+      box-shadow: 0 0 40px rgba(0,212,255,0.04), inset 0 1px 0 rgba(0,212,255,0.05);
+    }
+    .bio-label {
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.35rem;
+    }
+    .bio-value { font-size: 0.98rem; font-weight: 400; color: var(--text); }
+    .bio-field.full { grid-column: 1 / -1; }
+
+    /* EXPLORE */
+    .explore-heading {
+      text-align: center; font-size: 1.05rem; font-weight: 500;
+      color: var(--text); margin-bottom: 1.4rem;
+    }
+    .explore-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media(max-width: 500px) { .explore-grid { grid-template-columns: 1fr; } }
+
+    .explore-card {
+      background: var(--card-bg); border: 1px solid var(--cyan-border); border-radius: 12px;
+      padding: 1.6rem; text-decoration: none; color: var(--text);
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s; display: block;
+    }
+    .explore-card:hover {
+      border-color: var(--cyan); box-shadow: 0 0 22px rgba(0,212,255,0.1);
+      transform: translateY(-3px);
+    }
+    .explore-icon {
+      width: 42px; height: 42px; background: var(--cyan-dim); border: 1px solid var(--cyan-border);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; margin-bottom: 0.9rem;
+    }
+    .explore-title { font-size: 0.92rem; font-weight: 600; color: var(--cyan); margin-bottom: 0.45rem; }
+    .explore-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.9rem; }
+    .explore-link { font-size: 0.72rem; letter-spacing: 1px; color: var(--cyan); font-weight: 500; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(0,212,255,0.07); padding: 2rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-brand {
+      font-family: 'Orbitron', monospace; font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 3px; color: var(--cyan); text-shadow: 0 0 10px var(--cyan);
+    }
+    .footer-tagline { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+    .footer-links { display: flex; gap: 1.4rem; }
+    .footer-links a { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { font-size: 0.7rem; color: var(--muted); }
+
+    .fade-in { animation: fi 0.6s ease both; }
+    .fade-in-2 { animation: fi 0.6s 0.12s ease both; }
+    .fade-in-3 { animation: fi 0.6s 0.24s ease both; }
+    @keyframes fi { from { opacity:0; transform: translateY(18px); } to { opacity:1; transform:none; } }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>About Me</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About Me</a>
-      <a href="sports.html">Sports</a>
-    </nav>
-  </header>
+  <nav>
+    <a class="nav-brand" href="index.html">OLIVER BERG</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="patriots.html">Patriots</a></li>
+      <li><a href="lacrosse.html">Lacrosse</a></li>
+    </ul>
+  </nav>
 
-  <main>
-    <p><strong>Name:</strong> Oliver Berg</p>
-    <p><strong>Birthday:</strong> September 5, 2011</p>
-    <p><strong>Age:</strong> 14</p>
-    <p><strong>Location:</strong> Brookline, Massachusetts</p>
-    <p><strong>School:</strong> Dexter Southfield</p>
-    <p><strong>Grade:</strong> 8th</p>
-    <p><strong>Favorite Sports:</strong> Football and Lacrosse</p>
-  </main>
+  <div class="hero fade-in">
+    <div class="neon-frame">
+      <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div><div class="corner corner-br"></div>
+      <div class="neon-name">OLIVER</div>
+      <div class="neon-sub">ELITE PERFORMANCE &nbsp;⚡&nbsp; EST. 2024</div>
+    </div>
+    <div class="hero-tagline">Athlete &nbsp;·&nbsp; Fan &nbsp;·&nbsp; Student</div>
+  </div>
+
+  <section class="section fade-in-2">
+    <div class="section-heading">About Me</div>
+    <div class="bio-card">
+      <div class="bio-field">
+        <div class="bio-label">Name</div>
+        <div class="bio-value">Oliver Berg</div>
+      </div>
+      <div class="bio-field">
+        <div class="bio-label">Birthday</div>
+        <div class="bio-value">September 5th, 2011</div>
+      </div>
+      <div class="bio-field">
+        <div class="bio-label">Age</div>
+        <div class="bio-value">14</div>
+      </div>
+      <div class="bio-field">
+        <div class="bio-label">Location</div>
+        <div class="bio-value">Brookline, Massachusetts</div>
+      </div>
+      <div class="bio-field">
+        <div class="bio-label">School</div>
+        <div class="bio-value">Dexter Southfield</div>
+      </div>
+      <div class="bio-field">
+        <div class="bio-label">Grade</div>
+        <div class="bio-value">8th Grade</div>
+      </div>
+      <div class="bio-field full">
+        <div class="bio-label">Favorite Sports</div>
+        <div class="bio-value">Football &amp; Lacrosse</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section fade-in-3">
+    <div class="explore-heading">Explore My World</div>
+    <div class="explore-grid">
+      <a class="explore-card" href="patriots.html">
+        <div class="explore-icon">🏈</div>
+        <div class="explore-title">New England Patriots</div>
+        <p class="explore-desc">My team, my pride — the greatest dynasty in NFL history.</p>
+        <div class="explore-link">VIEW →</div>
+      </a>
+      <a class="explore-card" href="lacrosse.html">
+        <div class="explore-icon">🥍</div>
+        <div class="explore-title">My Lacrosse Team</div>
+        <p class="explore-desc">Check out my lacrosse team and everything going on this season.</p>
+        <div class="explore-link">VIEW →</div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="footer-brand">OLIVER BERG</div>
+      <div class="footer-tagline">The Field | The Court | The Drive</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="patriots.html">Patriots</a>
+      <a href="lacrosse.html">Lacrosse</a>
+    </div>
+    <div class="footer-copy">&copy; 2026. Oliver Berg</div>
+  </footer>
 </body>
 </html>
