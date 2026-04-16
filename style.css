@@ -1,0 +1,35 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: white;
+  text-align: center;
+}
+
+nav a {
+  margin: 10px;
+  color: cyan;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.neon {
+  font-size: 60px;
+  color: #00f;
+  text-shadow:
+    0 0 5px #00f,
+    0 0 10px #00f,
+    0 0 20px #00f,
+    0 0 40px #00f,
+    0 0 80px #00f;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+main {
+  padding: 20px;
+}
