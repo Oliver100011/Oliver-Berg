@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oliver Berg | Lacrosse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #000000;
+      --cyan: #00d4ff;
+      --cyan-dim: rgba(0,212,255,0.12);
+      --cyan-border: rgba(0,212,255,0.22);
+      --text: #e8edf5;
+      --muted: #5a6a7a;
+      --card-bg: #060d18;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 60px;
+      background: rgba(0,0,0,0.9); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,212,255,0.07);
+    }
+    .nav-brand {
+      font-family: 'Orbitron', monospace; font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 3px; color: var(--cyan); text-decoration: none;
+      text-shadow: 0 0 14px var(--cyan);
+    }
+    .nav-links { display: flex; list-style: none; }
+    .nav-links a {
+      display: block; padding: 0 1.1rem; height: 60px; line-height: 60px;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+      text-decoration: none; color: var(--muted); transition: color 0.2s; position: relative;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--cyan); }
+    .nav-links a.active::after {
+      content: ''; position: absolute; bottom: 0; left: 1.1rem; right: 1.1rem;
+      height: 2px; background: var(--cyan); box-shadow: 0 0 8px var(--cyan);
+    }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 120px 1.5rem 60px;
+      text-align: center;
+    }
+    .page-hero-icon {
+      width: 64px; height: 64px; margin: 0 auto 1.2rem;
+      background: var(--cyan-dim); border: 1px solid var(--cyan-border); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 0 20px rgba(0,212,255,0.15);
+    }
+    .page-hero h1 {
+      font-family: 'Orbitron', monospace; font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 900; letter-spacing: 0.05em; color: var(--cyan);
+      text-shadow: 0 0 30px rgba(0,212,255,0.4); margin-bottom: 1rem;
+    }
+    .page-hero p { font-size: 1rem; color: var(--muted); max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.8rem; border-radius: 8px; font-size: 0.78rem;
+      font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      text-decoration: none; transition: all 0.25s;
+    }
+    .btn-outline {
+      border: 1px solid var(--cyan-border); color: var(--cyan); background: var(--cyan-dim);
+    }
+    .btn-outline:hover { border-color: var(--cyan); background: rgba(0,212,255,0.2); box-shadow: 0 0 20px rgba(0,212,255,0.15); }
+
+    /* SECTIONS */
+    .section { max-width: 720px; margin: 0 auto; padding: 0 1.5rem 4.5rem; }
+    .section-heading {
+      font-family: 'Orbitron', monospace; font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 2.5px; color: var(--cyan); text-shadow: 0 0 10px rgba(0,212,255,0.4);
+      margin-bottom: 1.5rem;
+    }
+
+    /* WHY LACROSSE */
+    .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+    @media(max-width: 540px) { .why-grid { grid-template-columns: 1fr; } }
+
+    .why-card {
+      background: var(--card-bg); border: 1px solid var(--cyan-border); border-radius: 12px;
+      padding: 1.6rem 1.2rem; text-align: center;
+    }
+    .why-icon {
+      width: 42px; height: 42px; margin: 0 auto 0.9rem;
+      background: var(--cyan-dim); border: 1px solid var(--cyan-border); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+    }
+    .why-title { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+    .why-sub { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.8rem; }
+    .why-tag { font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan); }
+
+    /* POSITIONS */
+    .positions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .pos-card {
+      background: var(--card-bg); border: 1px solid var(--cyan-border); border-radius: 10px;
+      padding: 1.4rem 1.5rem; transition: border-color 0.2s;
+    }
+    .pos-card:hover { border-color: var(--cyan); }
+    .pos-name { font-size: 0.92rem; font-weight: 600; color: var(--cyan); margin-bottom: 0.5rem; }
+    .pos-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+    /* THE SPORT */
+    .sport-block {
+      background: var(--card-bg); border: 1px solid var(--cyan-border); border-radius: 12px;
+      padding: 2rem; line-height: 1.8; color: var(--muted); font-size: 0.9rem;
+    }
+    .sport-block p + p { margin-top: 1rem; }
+
+    footer {
+      border-top: 1px solid rgba(0,212,255,0.07); padding: 2rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-brand { font-family: 'Orbitron', monospace; font-size: 0.82rem; font-weight: 700; letter-spacing: 3px; color: var(--cyan); text-shadow: 0 0 10px var(--cyan); }
+    .footer-tagline { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+    .footer-links { display: flex; gap: 1.4rem; }
+    .footer-links a { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { font-size: 0.7rem; color: var(--muted); }
+
+    .fade-in { animation: fi 0.6s ease both; }
+    .fade-in-2 { animation: fi 0.6s 0.1s ease both; }
+    .fade-in-3 { animation: fi 0.6s 0.2s ease both; }
+    .fade-in-4 { animation: fi 0.6s 0.3s ease both; }
+    @keyframes fi { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform:none; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-brand" href="index.html">OLIVER BERG</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="patriots.html">Patriots</a></li>
+      <li><a href="lacrosse.html" class="active">Lacrosse</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero fade-in">
+    <div class="page-hero-icon">🎯</div>
+    <h1>Lacrosse</h1>
+    <p>The fastest game on two feet. Speed, skill, and teamwork — this is my game.</p>
+    <a class="btn btn-outline" href="https://my.sportngin.com" target="_blank" rel="noopener">↗ VISIT MY TEAM SITE</a>
+  </div>
+
+  <section class="section fade-in-2">
+    <div class="section-heading">Why Lacrosse?</div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">💨</div>
+        <div class="why-title">Fastest ball sport</div>
+        <div class="why-sub">Shots can exceed 100 mph</div>
+        <div class="why-tag">SPEED</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <div class="why-title">Hand-eye coordination</div>
+        <div class="why-sub">Cradling, passing, catching</div>
+        <div class="why-tag">PRECISION</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">👥</div>
+        <div class="why-title">10 players per side</div>
+        <div class="why-sub">Full coordination required</div>
+        <div class="why-tag">TEAMWORK</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section fade-in-3">
+    <div class="section-heading">Positions on the Field</div>
+    <div class="positions-grid">
+      <div class="pos-card">
+        <div class="pos-name">Attack</div>
+        <p class="pos-desc">Offensive players who score goals and create plays near the crease.</p>
+      </div>
+      <div class="pos-card">
+        <div class="pos-name">Midfield</div>
+        <p class="pos-desc">Versatile players who cover the whole field on both offense and defense.</p>
+      </div>
+      <div class="pos-card">
+        <div class="pos-name">Defense</div>
+        <p class="pos-desc">Protect the goal and clear the ball from the defensive zone.</p>
+      </div>
+      <div class="pos-card">
+        <div class="pos-name">Goalie</div>
+        <p class="pos-desc">The last line of defense — requires lightning-fast reflexes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section fade-in-4">
+    <div class="section-heading">The Sport</div>
+    <div class="sport-block">
+      <p>Lacrosse is one of the oldest team sports in North America, originally played by Indigenous peoples. Today it's one of the fastest-growing sports in the country — combining the physicality of hockey, the endurance of soccer, and the precision of basketball.</p>
+      <p>Players use a long-handled stick called a crosse to carry, pass, and shoot a small rubber ball into the opponent's goal. The game demands elite hand-eye coordination, explosive speed, and seamless team communication.</p>
+    </div>
+  </section>
+
+  <div style="text-align:center; padding-bottom:5rem;">
+    <a class="btn btn-outline" href="https://my.sportngin.com" target="_blank" rel="noopener">↗ VISIT MY TEAM SITE</a>
+  </div>
+
+  <footer>
+    <div>
+      <div class="footer-brand">OLIVER BERG</div>
+      <div class="footer-tagline">The Field | The Court | The Drive</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="patriots.html">Patriots</a>
+      <a href="lacrosse.html">Lacrosse</a>
+    </div>
+    <div class="footer-copy">&copy; 2026. Oliver Berg</div>
+  </footer>
+</body>
+</html>
